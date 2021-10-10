@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 
+
 const authentication = (req: Request, res: Response, next: NextFunction) => {
   const headers = req.headers;
   const isLoggedIn = headers.is_logged_in;
