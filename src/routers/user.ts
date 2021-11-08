@@ -1,51 +1,28 @@
-
-import express from 'express'
+import express from "express";
 
 import {
   createUser,
   login,
-} from '../controllers/userController'
+  updateUser,
+  findAllUser,
+  findUserById,
+  adminCheck,
+  deleteUser,
+} from "../controllers/userController";
 
-const router = express.Router()
+const router = express.Router();
 
 // Every path we define here will get /api/v1/movies prefix
 
-router.post('/', createUser)
-router.post('/login', login)
+router.post("/", createUser);
+router.get("/", findAllUser);
+router.post("/", adminCheck);
+router.post("/login", login);
+router.put("/:userId", updateUser);
+router.get("/:userId", findUserById);
+router.get("/:userId", deleteUser);
 
-export default router
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default router;
 
 // import express, { Request, Response } from 'express'
 

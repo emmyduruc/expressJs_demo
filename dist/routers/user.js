@@ -7,7 +7,13 @@ var express_1 = __importDefault(require("express"));
 var userController_1 = require("../controllers/userController");
 var router = express_1.default.Router();
 // Every path we define here will get /api/v1/movies prefix
-router.post('/', userController_1.createUser);
+router.post("/", userController_1.createUser);
+router.get("/", userController_1.findAllUser);
+router.post("/", userController_1.adminCheck);
+router.post("/login", userController_1.login);
+router.put("/:userId", userController_1.updateUser);
+router.get("/:userId", userController_1.findUserById);
+router.get("/:userId", userController_1.deleteUser);
 exports.default = router;
 // import express, { Request, Response } from 'express'
 // const router = express.Router()

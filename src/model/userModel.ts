@@ -8,6 +8,8 @@ export type UserDocument = Document & {
        lastName: string
        country: string
        state: string
+       desc: string
+       city: string
        houseNumber: string
        phoneNumber?: string
        postcode?: string
@@ -16,14 +18,13 @@ export type UserDocument = Document & {
        sex: string
        isAdmin: boolean
        password: string
-       picture: string
-       product: string[]
        cart: string[]
-       role: string
        profilePic: string
        followings: string[]
        followers: string[]
+       relationship: number
        coverPic: string
+       role: string
      }
 
      const UserSchema = new mongoose.Schema(
@@ -39,6 +40,16 @@ export type UserDocument = Document & {
            max: 40,
            unique: true,
          },
+         desc: {
+           type: String
+         },
+         city: {
+          type: String
+        },
+        relationship: {
+          type: Number,
+          enum:[1,2,3]
+        },
          password: {
            type: String,
            min: 7,
@@ -65,6 +76,10 @@ export type UserDocument = Document & {
            type: Boolean,
            default: false,
          },
+         role: { 
+           type: String,
+           default: true
+          }
        },
        { timestamps: true }
      );
