@@ -3,6 +3,7 @@ import express from 'express'
 
 import {
   createUser,
+  login,
 } from '../controllers/userController'
 
 const router = express.Router()
@@ -10,6 +11,7 @@ const router = express.Router()
 // Every path we define here will get /api/v1/movies prefix
 
 router.post('/', createUser)
+router.post('/login', login)
 
 export default router
 

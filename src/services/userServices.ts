@@ -7,28 +7,28 @@ const createUser = async (userDocument: UserDocument) => {
   const createdUser = await userDocument.save();
   return createdUser;
 };
+const loginByEmail = async ({ email, password }: UserDocument) => {
+  const foundUser = await Users.findOne({ email });
+  const userPassword = await Users.findOne({ password });
 
+  if (foundUser !== userPassword) {
+    throw new NotFoundError(`User ${email} or ${password} not found`);
+  } else {
+    console.log("please create an account");
+  }
+  return foundUser;
+};
 
-
-
-const findUserByEmail = async (email: string) => {
-       const foundUser = await Users.findOne({email})
-     
-       if (!foundUser) {
-         throw new NotFoundError(`User ${email} not found`)
-       }
-     
-      
-     }
-// const userLogin = async (userId: string): Promise<UserDocument> => {
-//   const existingUser = await Users.findOne(userId);
-
-//   if (!existingUser) {
-//     throw new NotFoundError(`User ${email} not found`);
-//   }
-//   return existingUser;
-// };
 export default {
-       createUser,
-       findUserByEmail,
-     };
+  createUser,
+  loginByEmail,
+};
+
+// const loginByEmail = async ({ email }: UserDocument) => {
+//        const foundUser = await Users.findOne({ email });
+
+//        if (!foundUser) {
+//          throw new NotFoundError(`User ${email} not found`);
+//        }
+//        return foundUser;
+//      };

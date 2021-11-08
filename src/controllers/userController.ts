@@ -24,6 +24,7 @@ export const createUser = async (
       product = [],
     } = req.body;
     const user = new userModel({
+      firstName,
       username,
       lastName,
       country,
@@ -51,8 +52,8 @@ export const login = async (
   next: NextFunction
 ) => {
   try {
-    await userServices.findUserByEmail(req.body.email);
-    res.status(201).end();
+    const { email, password } = req.body;
+    res.json(await userServices.loginByEmail(req.body));
   } catch (error) {
     if (error instanceof Error && error.name == "ValidationError") {
       next(new BadRequestError("Invalid Request", error));
@@ -61,3 +62,14 @@ export const login = async (
     }
   }
 };
+
+// try {
+//        const validUser = await userServices.findUserByEmail(req.body.email);
+//        res.json(validUser);
+//      } catch (error) {
+//        if (error instanceof Error && error.name == "ValidationError") {
+//          next(new BadRequestError("Invalid Request", error));
+//        } else {
+//          next(error);
+//        }
+//      }
