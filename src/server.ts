@@ -3,6 +3,7 @@ import { connect } from "mongoose";
 import Helmet from "helmet"
 import morgan from "morgan";
 import userRouter from "./routers/user";
+import postRouter from "./routers/postRouter";
 import authentication from "./middlewares/authentication";
 
 
@@ -24,6 +25,7 @@ app.use(Helmet());
 
 
 app.use("/user", userRouter);
+app.use("/api/post", postRouter);
 
 
 app.listen(8800, () => {

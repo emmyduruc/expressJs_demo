@@ -1,12 +1,17 @@
 import { UserDocument } from "../model/userModel";
 import Users from "../model/userModel";
-import { NotFoundError } from "../helpers/errorHelpers";
+import {
+  ForbiddenError,
+  InternalServerError,
+  NotFoundError,
+} from "../helpers/errorHelpers";
 
 //POST
 const createUser = async (userDocument: UserDocument) => {
   const createdUser = await userDocument.save();
   return createdUser;
 };
+
 const loginByEmail = async ({ email, password }: UserDocument) => {
   const foundUser = await Users.findOne({ email }, { password });
   // const userPassword = await Users.findOne();
@@ -70,12 +75,24 @@ const deleteById = async (userId: string): Promise<UserDocument> => {
   return foundUser;
 };
 
+//PUT User Follower fix this later:::::::::::::::::::
+const followUser = async (userId: string, update: string, follow: string) => {
+  const user = await Users.findById(userId);
+  const currentUser = await Users.findById(update);
+  if (user !== currentUser) {
+    throw new InternalServerError("Internal Server Error");
+  } else {
+    throw new ForbiddenError("you cannot follow yourself");
+  }
+};
+
 export default {
   createUser,
   loginByEmail,
   updateUser,
   deleteById,
   adminCheck,
+  followUser,
   findUserById,
   findAllUser,
 };

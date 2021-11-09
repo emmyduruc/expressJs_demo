@@ -12,8 +12,9 @@ router.get("/", userController_1.findAllUser);
 router.post("/", userController_1.adminCheck);
 router.post("/login", userController_1.login);
 router.put("/:userId", userController_1.updateUser);
+router.put("/:userId/follow", userController_1.followUser);
 router.get("/:userId", userController_1.findUserById);
-router.get("/:userId", userController_1.deleteUser);
+router.delete("/:userId", userController_1.deleteUser);
 exports.default = router;
 // import express, { Request, Response } from 'express'
 // const router = express.Router()

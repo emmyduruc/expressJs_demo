@@ -83,13 +83,14 @@ export const updateUser = async (
   }
 };
 
+//POST
 export const adminCheck = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const user = await userServices.adminCheck(req.body.role);
+    await userServices.adminCheck(req.body.role);
   } catch (error) {
     if (error instanceof Error && error.name == "ValidationError") {
       next(new BadRequestError("Invalid Request", error));
@@ -151,13 +152,23 @@ export const deleteUser = async (
   }
 };
 
-// try {
-//        const validUser = await userServices.findUserByEmail(req.body.email);
-//        res.json(validUser);
-//      } catch (error) {
-//        if (error instanceof Error && error.name == "ValidationError") {
-//          next(new BadRequestError("Invalid Request", error));
-//        } else {
-//          next(error);
-//        }
-//      }
+//PUT User Follower fix this later:::::::::::::::::::
+export const followUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const update = req.body.userId;
+    const follow = req.body.followers;
+    const userId = req.params.userId;
+    const updatedUser = await userServices.followUser(userId, update, follow);
+    res.json(updatedUser);
+  } catch (error) {
+    if (error instanceof Error && error.name == "ValidationError") {
+      next(new BadRequestError("Invalid Request", error));
+    } else {
+      next(error);
+    }
+  }
+};

@@ -8,6 +8,7 @@ import {
   findUserById,
   adminCheck,
   deleteUser,
+  followUser,
 } from "../controllers/userController";
 
 const router = express.Router();
@@ -19,8 +20,9 @@ router.get("/", findAllUser);
 router.post("/", adminCheck);
 router.post("/login", login);
 router.put("/:userId", updateUser);
+router.put("/:userId/follow", followUser);
 router.get("/:userId", findUserById);
-router.get("/:userId", deleteUser);
+router.delete("/:userId", deleteUser);
 
 export default router;
 
