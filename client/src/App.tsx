@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import styled from 'styled-components'
+import Nav from './components/navbar/Nav'
+import LeftSide from './components/leftbar/LeftSide';
+import PostFeed from './components/post/PostFeed';
+import RightSide from './components/rightBar/RightSide';
+import UserProfile from './components/profile/UserProfile';
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  cursor: pointer;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <UserProfile/>
+    </>
   );
 }
 
